@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69b1409c049d1dd48a86bf454cab12f4, type: 3}
-  m_Name: Sphere
+  m_Name: Air
   m_EditorClassIdentifier: 
   id: 0
-  displayName: Sphere
-  prefab: {fileID: 6239174568039206013, guid: 0ad912ff0d73ec1428b5eac9b1d0afc8, type: 3}
+  displayName: Air
+  preview: {fileID: 2800000, guid: c9e27f4ecf1ea69458add4de34b963b5, type: 3}
+  prefab: {fileID: 0}

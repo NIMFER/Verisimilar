@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69b1409c049d1dd48a86bf454cab12f4, type: 3}
+  m_Name: Ice
+  m_EditorClassIdentifier: 
+  id: 1
+  displayName: Ice
+  preview: {fileID: 2800000, guid: 8f6240cf50c41934e9aed9b88afc6dd8, type: 3}
+  prefab: {fileID: 6239174568039206013, guid: 0ad912ff0d73ec1428b5eac9b1d0afc8, type: 3}
+  slot: 1
+  duration: 10
+  speed: -4
+  nightVision: -0.5
+  silence: -5
+  stamina: -0.99
