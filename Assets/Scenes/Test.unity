@@ -311,6 +311,9 @@ GameObject:
   - component: {fileID: 1045692242}
   - component: {fileID: 1045692241}
   - component: {fileID: 1045692240}
+  - component: {fileID: 1045692246}
+  - component: {fileID: 1045692245}
+  - component: {fileID: 1045692244}
   m_Layer: 0
   m_Name: Player
   m_TagString: ItemTarget
@@ -394,6 +397,73 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1045692244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045692239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777675542a674f346bb9629fd1eb84bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1045692245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045692239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d02c64b310d09c04d815f01b484960ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterRigidbody: {fileID: 0}
+  environmentCollider: {fileID: 0}
+  wallCollider: {fileID: 0}
+  characterHitboxes: []
+  walkSpeed: 0
+  airControlStrength: 0
+  crouchSpeedDecrease: 0
+  sprintSpeedIncrease: 0
+  ladderClimbingSpeed: 0
+  jumpPower: 0
+  crouchHeight: 0
+  crouchSmoothing: 0
+  lookVerticalSpeed: 0
+  lookHorizontalSpeed: 0
+  aimVerticalSpeed: 0
+  aimHorizontalSpeed: 0
+  stepSmoothing: 0
+  stepHeight: 0
+  allowSprint: 0
+  allowJump: 0
+--- !u!114 &1045692246
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045692239}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11afecc1cbbd8e8449477483a5577cb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterState: 0
+  movementType: 0
+  ceilingDetected: 0
+  eligibleForStep: 0
+  onLadder: 0
+  topOnLadder: 0
+  bottomOnLadder: 0
+  enteredLadderFromBottom: 0
+  enteredLadderFromTop: 0
+  topLadder: {fileID: 0}
+  bottomLadder: {fileID: 0}
 --- !u!1 &1852065709
 GameObject:
   m_ObjectHideFlags: 0
