@@ -33,7 +33,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
         void Start()
         {
             _wallColliderNormalScale = _characterConfig.wallCollider.localScale;
-            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeight, _wallColliderNormalScale.z);
+            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeightDecrease, _wallColliderNormalScale.z);
         }
 
         private void WalkInput(Vector2 walkInputValue, bool performing)

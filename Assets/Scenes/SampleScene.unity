@@ -3612,7 +3612,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh35608
+  m_Name: pb_Mesh26798
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3852,11 +3852,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxXCamRotation: 80
   _playerCharacterTransform: {fileID: 7805241975877327184}
---- !u!4 &1664930368 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6764150377897974489, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
-  m_PrefabInstance: {fileID: 7460501666406572029}
-  m_PrefabAsset: {fileID: 0}
 --- !u!850595691 &1920567909
 LightingSettings:
   m_ObjectHideFlags: 0
@@ -3926,9 +3921,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 853657004856395088, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
+      propertyPath: crouchHeight
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 853657004856395088, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
       propertyPath: objectCollider
       value: 
-      objectReference: {fileID: 1664930368}
+      objectReference: {fileID: 0}
+    - target: {fileID: 853657004856395088, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
+      propertyPath: crouchHeightDecrease
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 853657004856395433, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
       propertyPath: m_Name
       value: Player_NewCamera
@@ -4005,7 +4008,9 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 853657004856395095, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
+    - {fileID: 853657004856395444, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
 --- !u!4 &7805241975877327184 stripped
 Transform:
