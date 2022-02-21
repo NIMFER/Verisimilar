@@ -3612,7 +3612,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh26798
+  m_Name: pb_Mesh24070
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -3927,10 +3927,6 @@ PrefabInstance:
     - target: {fileID: 853657004856395088, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
       propertyPath: objectCollider
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 853657004856395088, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
-      propertyPath: crouchHeightDecrease
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 853657004856395433, guid: 9119ed5f32a997645b6498ae50786a55, type: 3}
       propertyPath: m_Name
