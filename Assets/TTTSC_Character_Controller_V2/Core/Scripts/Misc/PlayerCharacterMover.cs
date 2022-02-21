@@ -6,7 +6,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
     [RequireComponent(typeof(PlayerInputReceiver))]
     public class PlayerCharacterMover : MonoBehaviour
     {
-        private Vector3 _wallColliderNormalScale, _objectColliderNormalScale, _wallColliderCrouchedScale, _objectColliderCrouchedScale, _wallColliderNormalPosition, _wallColliderCrouchedPosition, _objectColliderNormalPosition, _objectColliderCrouchedPosition;
+        private Vector3 _wallColliderNormalScale, _wallColliderCrouchedScale;
         private float _crouchInterpolationStage = 1;
         private CharacterFST _characterFST;
         private CharacterConfig _characterConfig;
@@ -34,13 +34,6 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
         {
             _wallColliderNormalScale = _characterConfig.wallCollider.localScale;
             _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeight, _wallColliderNormalScale.z);
-            _wallColliderNormalPosition = _characterConfig.wallCollider.localPosition;
-            _wallColliderCrouchedPosition = new Vector3(_wallColliderNormalPosition.x, _wallColliderNormalPosition.y / _characterConfig.crouchHeight, _wallColliderNormalPosition.z);
-            _objectColliderNormalScale = _characterConfig.objectCollider.localScale;
-            _objectColliderCrouchedScale = new Vector3(_objectColliderNormalScale.x, _objectColliderNormalScale.y / _characterConfig.crouchHeight, _objectColliderNormalScale.z);
-            _objectColliderNormalPosition = _characterConfig.objectCollider.localPosition;
-            _objectColliderCrouchedPosition = new Vector3(_objectColliderNormalPosition.x, _objectColliderNormalPosition.y / _characterConfig.crouchHeight, _objectColliderNormalPosition.z);
-
         }
 
         private void WalkInput(Vector2 walkInputValue, bool performing)
@@ -132,17 +125,12 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
         {
             var wallColliderTransform = _characterConfig.wallCollider.transform;
             var environmentCollider = _characterConfig.environmentCollider;
-            var objectCollider = _characterConfig.objectCollider;
-
 
             if (_crouchInterpolationStage > 0)
             {
                 _crouchInterpolationStage -= _characterConfig.crouchSmoothing * Time.deltaTime;
                 wallColliderTransform.localScale = Vector3.Lerp(_wallColliderCrouchedScale, _wallColliderNormalScale, _crouchInterpolationStage);
-                wallColliderTransform.localPosition = Vector3.Lerp(_wallColliderCrouchedPosition, _wallColliderNormalPosition, _crouchInterpolationStage);
                 environmentCollider.height = Mathf.Lerp(1f, 2f, _crouchInterpolationStage);
-                objectCollider.localScale = Vector3.Lerp(_objectColliderCrouchedScale, _objectColliderNormalScale, _crouchInterpolationStage);
-                objectCollider.localPosition = Vector3.Lerp(_objectColliderCrouchedPosition, _objectColliderNormalPosition, _crouchInterpolationStage);
             }
 
 
@@ -152,16 +140,12 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
         {
             var wallColliderTransform = _characterConfig.wallCollider.transform;
             var environmentCollider = _characterConfig.environmentCollider;
-            var objectCollider = _characterConfig.objectCollider;
 
             if (_crouchInterpolationStage < 1)
             {
                 _crouchInterpolationStage += _characterConfig.crouchSmoothing * Time.deltaTime;
                 wallColliderTransform.localScale = Vector3.Lerp(_wallColliderCrouchedScale, _wallColliderNormalScale, _crouchInterpolationStage); // For some reason this line crashes the editor
-                wallColliderTransform.localPosition = Vector3.Lerp(_wallColliderCrouchedPosition, _wallColliderNormalPosition, _crouchInterpolationStage);
                 environmentCollider.height = Mathf.Lerp(1f, 2f, _crouchInterpolationStage);
-                objectCollider.localScale = Vector3.Lerp(_objectColliderCrouchedScale, _objectColliderNormalScale, _crouchInterpolationStage);
-                objectCollider.localPosition = Vector3.Lerp(_objectColliderCrouchedPosition, _objectColliderNormalPosition, _crouchInterpolationStage);
             }
 
 
@@ -169,15 +153,19 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         private void Jump(float jump)
         {
-
-            switch (_characterFST.characterState)
+            switch (_characterConfig.allowJump)
             {
-                case CharacterFST.CharacterState.OnGround:
-                    Rigidbody rb = _characterConfig.characterRigidbody;
-                    rb.AddForce(transform.up * _characterConfig.jumpPower, ForceMode.Impulse);
+                case true:
+                    switch (_characterFST.characterState)
+                    {
+                        case CharacterFST.CharacterState.OnGround:
+                            Rigidbody rb = _characterConfig.characterRigidbody;
+                            rb.AddForce(transform.up * _characterConfig.jumpPower, ForceMode.Impulse);
+                            break;
+                    }
                     break;
-            }
 
+            }
         }
 
     }

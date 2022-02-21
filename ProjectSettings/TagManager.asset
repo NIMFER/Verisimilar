@@ -11,10 +11,10 @@ TagManager:
   - Enviorment
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Object
+  - CharEnvironmentCollider
+  - CharObjectCollider
+  - Player
   - 
   - 
   - 

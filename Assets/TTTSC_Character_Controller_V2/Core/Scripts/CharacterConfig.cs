@@ -7,7 +7,6 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
         public Rigidbody characterRigidbody; // Rigidbody that will be used for moving character around
         public CapsuleCollider environmentCollider; // Collider for enviorment (map and other static objects)
         public Transform wallCollider; // Collider for walls (it has no friction and fixes sticking to walls)
-        public Transform objectCollider; // A special collider for player and props
         public BoxCollider[] characterHitboxes; // Hidboxes for character model
         public float walkSpeed; // This value controlls at what speed your character walks
         public float airControlStrength; // This value controlls strenght of the force applied to the player when in the air
@@ -24,5 +23,6 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
         public float stepSmoothing; // This value controlls the time value of lerp in CameraSmoother
         public float stepHeight; // This value controlls how high steps charecter takes
         public bool allowSprint; // bool for enabling sprint
+        public bool allowJump; // bool for enabling jumping
     }
 }

@@ -73,8 +73,8 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Shop"",
-                    ""type"": ""Button"",
+                    ""name"": ""Inventory"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""f0c5d1ce-c578-4d69-84f9-8438ac07a980"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
@@ -349,11 +349,11 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""d901207b-8d93-4616-9604-0c5512c31043"",
-                    ""path"": ""<Keyboard>/c"",
+                    ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""KeyboardAndMouse"",
-                    ""action"": ""Shop"",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -468,7 +468,7 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
         m_Controlls_Crouch = m_Controlls.FindAction("Crouch", throwIfNotFound: true);
         m_Controlls_Jump = m_Controlls.FindAction("Jump", throwIfNotFound: true);
         m_Controlls_Interact = m_Controlls.FindAction("Interact", throwIfNotFound: true);
-        m_Controlls_Shop = m_Controlls.FindAction("Shop", throwIfNotFound: true);
+        m_Controlls_Inventory = m_Controlls.FindAction("Inventory", throwIfNotFound: true);
         m_Controlls_Aim = m_Controlls.FindAction("Aim", throwIfNotFound: true);
         m_Controlls_Shoot = m_Controlls.FindAction("Shoot", throwIfNotFound: true);
         m_Controlls_DropItem = m_Controlls.FindAction("DropItem", throwIfNotFound: true);
@@ -539,7 +539,7 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
     private readonly InputAction m_Controlls_Crouch;
     private readonly InputAction m_Controlls_Jump;
     private readonly InputAction m_Controlls_Interact;
-    private readonly InputAction m_Controlls_Shop;
+    private readonly InputAction m_Controlls_Inventory;
     private readonly InputAction m_Controlls_Aim;
     private readonly InputAction m_Controlls_Shoot;
     private readonly InputAction m_Controlls_DropItem;
@@ -555,7 +555,7 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Controlls_Crouch;
         public InputAction @Jump => m_Wrapper.m_Controlls_Jump;
         public InputAction @Interact => m_Wrapper.m_Controlls_Interact;
-        public InputAction @Shop => m_Wrapper.m_Controlls_Shop;
+        public InputAction @Inventory => m_Wrapper.m_Controlls_Inventory;
         public InputAction @Aim => m_Wrapper.m_Controlls_Aim;
         public InputAction @Shoot => m_Wrapper.m_Controlls_Shoot;
         public InputAction @DropItem => m_Wrapper.m_Controlls_DropItem;
@@ -586,9 +586,9 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
                 @Interact.started -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInteract;
                 @Interact.performed -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInteract;
                 @Interact.canceled -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInteract;
-                @Shop.started -= m_Wrapper.m_ControllsActionsCallbackInterface.OnShop;
-                @Shop.performed -= m_Wrapper.m_ControllsActionsCallbackInterface.OnShop;
-                @Shop.canceled -= m_Wrapper.m_ControllsActionsCallbackInterface.OnShop;
+                @Inventory.started -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInventory;
+                @Inventory.performed -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInventory;
+                @Inventory.canceled -= m_Wrapper.m_ControllsActionsCallbackInterface.OnInventory;
                 @Aim.started -= m_Wrapper.m_ControllsActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_ControllsActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_ControllsActionsCallbackInterface.OnAim;
@@ -626,9 +626,9 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
                 @Interact.started += instance.OnInteract;
                 @Interact.performed += instance.OnInteract;
                 @Interact.canceled += instance.OnInteract;
-                @Shop.started += instance.OnShop;
-                @Shop.performed += instance.OnShop;
-                @Shop.canceled += instance.OnShop;
+                @Inventory.started += instance.OnInventory;
+                @Inventory.performed += instance.OnInventory;
+                @Inventory.canceled += instance.OnInventory;
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
@@ -676,7 +676,7 @@ public partial class @PlayerInputSender : IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
-        void OnShop(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnShoot(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
