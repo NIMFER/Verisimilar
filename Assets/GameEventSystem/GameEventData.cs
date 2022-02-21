@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 [Serializable]
 public class GameEventData
 {
+    // value name
     public string valueName;
     public enum returnValueTypeEnum
     {
@@ -21,10 +22,11 @@ public class GameEventData
         Vector3
     }
 
+    // drop down for value type
     public returnValueTypeEnum valueType;
 
 
-    //remember to make your own system of conditional fields
+    // here we disable and enable fields acordingly
 
     [ConditionalField(nameof(valueType), false, returnValueTypeEnum.Bool)]
     public bool returnBool;
@@ -38,9 +40,4 @@ public class GameEventData
     public Vector2 returnVector2;
     [ConditionalField(nameof(valueType), false, returnValueTypeEnum.Vector3)]
     public Vector3 returnVector3;
-
-    public static implicit operator Task(GameEventData v)
-    {
-        throw new NotImplementedException();
-    }
 }
