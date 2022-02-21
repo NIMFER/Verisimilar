@@ -13,7 +13,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
         private CharacterFST _characterFST;
     
         public event Action<Vector2, bool> walkInputEvent, lookInputEvent;
-        public event Action<float> sprintInputEvent, crouchInputEvent, jumpInputEvent;
+        public event Action<float> sprintInputEvent, crouchInputEvent, jumpInputEvent, inventoryInputEvent;
 
 
         public PlayerInputSender playerInputEvents;
@@ -30,6 +30,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
             playerInputEvents.Controlls.Sprint.performed += SprintInputReceiver;
             playerInputEvents.Controlls.Jump.performed += JumpInputReceiver;
             playerInputEvents.Controlls.Crouch.performed += CrouchInputReceiver;
+            playerInputEvents.Controlls.Inventory.performed += OpenInventoryInputReceiver;
         }
 
         private void OnDisable()
@@ -40,6 +41,8 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
             playerInputEvents.Controlls.Sprint.performed -= SprintInputReceiver;
             playerInputEvents.Controlls.Jump.performed -= JumpInputReceiver;
             playerInputEvents.Controlls.Crouch.performed -= CrouchInputReceiver;
+            playerInputEvents.Controlls.Inventory.performed -= OpenInventoryInputReceiver;
+
         }
 
         private void LookXInputReceiver(InputAction.CallbackContext ctx)
@@ -107,9 +110,9 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
             jumpInputEvent?.Invoke(ctx.ReadValue<float>());
         }
 
-        void OpenShopInputReceiver(InputAction.CallbackContext ctx)
+        void OpenInventoryInputReceiver(InputAction.CallbackContext ctx)
         {
-            //openShopInputValue = ctx.ReadValue<bool>();
+            inventoryInputEvent?.Invoke(ctx.ReadValue<float>());
         }
 
         void ShootInputReceiver(InputAction.CallbackContext ctx)

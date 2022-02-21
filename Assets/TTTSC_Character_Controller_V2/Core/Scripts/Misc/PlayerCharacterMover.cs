@@ -6,20 +6,20 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
     [RequireComponent(typeof(PlayerInputReceiver))]
     public class PlayerCharacterMover : MonoBehaviour
     {
-        private Vector3 _wallColliderNormalScale, _objectColliderNormalScale, _wallColliderCrouchedScale, _objectColliderCrouchedScale, _wallColliderNormalPosition, _wallColliderCrouchedPosition, _objectColliderNormalPosition, _objectColliderCrouchedPosition;
-        [SerializeField]
+        private Vector3 _wallColliderNormalScale, _wallColliderCrouchedScale;
         private float _crouchInterpolationStage = 1;
-
         private CharacterFST _characterFST;
-
-        CharacterConfig _config;
+        private CharacterConfig _characterConfig;
         bool _walkPerforming;
-        Vector2 _walkInput;
+        private Vector2 _walkInput;
+
+        [SerializeField]
+        private Transform _camTransform;
+
         private void OnEnable()
         {
-            
             _characterFST = GetComponent<CharacterFST>();
-            _config = GetComponent<CharacterConfig>();
+            _characterConfig = GetComponent<CharacterConfig>();
             GetComponent<PlayerInputReceiver>().jumpInputEvent += Jump;
             GetComponent<PlayerInputReceiver>().walkInputEvent += WalkInput;
         }
@@ -32,15 +32,8 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         void Start()
         {
-            _wallColliderNormalScale = _config.wallCollider.localScale;
-            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _config.crouchHeight, _wallColliderNormalScale.z);
-            _wallColliderNormalPosition = _config.wallCollider.localPosition;
-            _wallColliderCrouchedPosition = new Vector3(_wallColliderNormalPosition.x, _wallColliderNormalPosition.y / _config.crouchHeight, _wallColliderNormalPosition.z);
-            _objectColliderNormalScale = _config.objectCollider.localScale;
-            _objectColliderCrouchedScale = new Vector3(_objectColliderNormalScale.x, _objectColliderNormalScale.y / _config.crouchHeight, _objectColliderNormalScale.z);
-            _objectColliderNormalPosition = _config.objectCollider.localPosition;
-            _objectColliderCrouchedPosition = new Vector3(_objectColliderNormalPosition.x, _objectColliderNormalPosition.y / _config.crouchHeight, _objectColliderNormalPosition.z);
-
+            _wallColliderNormalScale = _characterConfig.wallCollider.localScale;
+            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeight, _wallColliderNormalScale.z);
         }
 
         private void WalkInput(Vector2 walkInputValue, bool performing)
@@ -54,12 +47,10 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
             if (GetComponent<CharacterFST>().characterState == CharacterFST.CharacterState.OnGround && !GetComponent<CharacterFST>().topOnLadder)
             {
                 Move();
-                //Debug.Log("on ground");
             } 
             else if(GetComponent<CharacterFST>().characterState == CharacterFST.CharacterState.InAir && !GetComponent<CharacterFST>().topOnLadder)
             {
                 MoveInAir();
-                //Debug.Log("in air");
             }
 
 
@@ -77,8 +68,8 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         private void Move()
         {
-            Rigidbody rb = _config.characterRigidbody;
-            Vector2 move = new Vector2(_walkInput.x * 225 * _config.walkSpeed * Time.deltaTime, _walkInput.y * 225 * _config.walkSpeed * Time.deltaTime);
+            Rigidbody rb = _characterConfig.characterRigidbody;
+            Vector2 move = new Vector2(_walkInput.x * 225 * _characterConfig.walkSpeed * Time.deltaTime, _walkInput.y * 225 * _characterConfig.walkSpeed * Time.deltaTime);
         
 
             if (_walkInput == new Vector2(1, 0) || _walkInput == new Vector2(-1, 0) || _walkInput == new Vector2(0, 1) || _walkInput == new Vector2(0, -1))
@@ -94,28 +85,26 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
             switch (_characterFST.movementType)
             {
                 case CharacterFST.MovementType.Sprint:
-                    move *= _config.sprintSpeedIncrease;
+                    move *= _characterConfig.sprintSpeedIncrease;
                     break;
                 case CharacterFST.MovementType.Crouch:
-                    move /= _config.crouchSpeedDecrease;
+                    move /= _characterConfig.crouchSpeedDecrease;
                     break;
             }
 
-            //Debug.Log("current force = " + move);
             if (_walkPerforming)
             {
                 rb.AddForce(transform.forward * move.y - rb.velocity + transform.right * move.x - rb.velocity, ForceMode.Impulse);
-                //rb.velocity = transform.right * move.x + transform.up * rb.velocity.y + transform.forward * move.y;
                 if (_characterFST.eligibleForStep && _characterFST.movementType != CharacterFST.MovementType.Crouch)
-                    rb.position -= new Vector3(0f, -_config.stepHeight, 0f);
+                    rb.position -= new Vector3(0f, -_characterConfig.stepHeight, 0f);
             }
 
         }
 
         private void MoveInAir()
         {
-            Rigidbody rb = _config.characterRigidbody;
-            Vector2 move = new Vector2(_walkInput.x * 225 * _config.airControlStrength * Time.deltaTime, _walkInput.y * 225 * _config.airControlStrength * Time.deltaTime);
+            Rigidbody rb = _characterConfig.characterRigidbody;
+            Vector2 move = new Vector2(_walkInput.x * 225 * _characterConfig.airControlStrength * Time.deltaTime, _walkInput.y * 225 * _characterConfig.airControlStrength * Time.deltaTime);
 
             if (_walkInput == new Vector2(1, 0) || _walkInput == new Vector2(-1, 0) || _walkInput == new Vector2(0, 1) || _walkInput == new Vector2(0, -1))
             {
@@ -134,19 +123,14 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         private void Crouch()
         {
-            var wallColliderTransform = _config.wallCollider.transform;
-            var environmentCollider = _config.environmentCollider;
-            var objectCollider = _config.objectCollider;
-
+            var wallColliderTransform = _characterConfig.wallCollider.transform;
+            var environmentCollider = _characterConfig.environmentCollider;
 
             if (_crouchInterpolationStage > 0)
             {
-                _crouchInterpolationStage -= _config.crouchSmoothing * Time.deltaTime;
+                _crouchInterpolationStage -= _characterConfig.crouchSmoothing * Time.deltaTime;
                 wallColliderTransform.localScale = Vector3.Lerp(_wallColliderCrouchedScale, _wallColliderNormalScale, _crouchInterpolationStage);
-                wallColliderTransform.localPosition = Vector3.Lerp(_wallColliderCrouchedPosition, _wallColliderNormalPosition, _crouchInterpolationStage);
                 environmentCollider.height = Mathf.Lerp(1f, 2f, _crouchInterpolationStage);
-                objectCollider.localScale = Vector3.Lerp(_objectColliderCrouchedScale, _objectColliderNormalScale, _crouchInterpolationStage);
-                objectCollider.localPosition = Vector3.Lerp(_objectColliderCrouchedPosition, _objectColliderNormalPosition, _crouchInterpolationStage);
             }
 
 
@@ -154,18 +138,14 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         private void UnCrouch()
         {
-            var wallColliderTransform = _config.wallCollider.transform;
-            var environmentCollider = _config.environmentCollider;
-            var objectCollider = _config.objectCollider;
+            var wallColliderTransform = _characterConfig.wallCollider.transform;
+            var environmentCollider = _characterConfig.environmentCollider;
 
             if (_crouchInterpolationStage < 1)
             {
-                _crouchInterpolationStage += _config.crouchSmoothing * Time.deltaTime;
+                _crouchInterpolationStage += _characterConfig.crouchSmoothing * Time.deltaTime;
                 wallColliderTransform.localScale = Vector3.Lerp(_wallColliderCrouchedScale, _wallColliderNormalScale, _crouchInterpolationStage); // For some reason this line crashes the editor
-                wallColliderTransform.localPosition = Vector3.Lerp(_wallColliderCrouchedPosition, _wallColliderNormalPosition, _crouchInterpolationStage);
                 environmentCollider.height = Mathf.Lerp(1f, 2f, _crouchInterpolationStage);
-                objectCollider.localScale = Vector3.Lerp(_objectColliderCrouchedScale, _objectColliderNormalScale, _crouchInterpolationStage);
-                objectCollider.localPosition = Vector3.Lerp(_objectColliderCrouchedPosition, _objectColliderNormalPosition, _crouchInterpolationStage);
             }
 
 
@@ -173,15 +153,19 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         private void Jump(float jump)
         {
-
-            switch (_characterFST.characterState)
+            switch (_characterConfig.allowJump)
             {
-                case CharacterFST.CharacterState.OnGround:
-                    Rigidbody rb = _config.characterRigidbody;
-                    rb.AddForce(transform.up * _config.jumpPower, ForceMode.Impulse);
+                case true:
+                    switch (_characterFST.characterState)
+                    {
+                        case CharacterFST.CharacterState.OnGround:
+                            Rigidbody rb = _characterConfig.characterRigidbody;
+                            rb.AddForce(transform.up * _characterConfig.jumpPower, ForceMode.Impulse);
+                            break;
+                    }
                     break;
-            }
 
+            }
         }
 
     }

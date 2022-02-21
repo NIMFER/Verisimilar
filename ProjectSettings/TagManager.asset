@@ -8,13 +8,13 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Enviorment
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Object
+  - CharEnvironmentCollider
+  - CharObjectCollider
+  - Player
   - 
   - 
   - 

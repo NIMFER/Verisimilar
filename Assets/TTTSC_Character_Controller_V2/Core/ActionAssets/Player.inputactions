@@ -51,8 +51,8 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Shop",
-                    "type": "Button",
+                    "name": "Inventory",
+                    "type": "PassThrough",
                     "id": "f0c5d1ce-c578-4d69-84f9-8438ac07a980",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -327,11 +327,11 @@
                 {
                     "name": "",
                     "id": "d901207b-8d93-4616-9604-0c5512c31043",
-                    "path": "<Keyboard>/c",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardAndMouse",
-                    "action": "Shop",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
