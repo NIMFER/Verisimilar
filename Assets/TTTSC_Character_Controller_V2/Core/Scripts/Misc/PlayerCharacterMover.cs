@@ -32,8 +32,10 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
 
         void Start()
         {
+
+
             _wallColliderNormalScale = _characterConfig.wallCollider.localScale;
-            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeight, _wallColliderNormalScale.z);
+            _wallColliderCrouchedScale = new Vector3(_wallColliderNormalScale.x, _wallColliderNormalScale.y / _characterConfig.crouchHeightDecrease, _wallColliderNormalScale.z);
         }
 
         private void WalkInput(Vector2 walkInputValue, bool performing)
@@ -96,7 +98,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
             {
                 rb.AddForce(transform.forward * move.y - rb.velocity + transform.right * move.x - rb.velocity, ForceMode.Impulse);
                 if (_characterFST.eligibleForStep && _characterFST.movementType != CharacterFST.MovementType.Crouch)
-                    rb.position -= new Vector3(0f, -_characterConfig.stepHeight, 0f);
+                    rb.position += new Vector3(0f, _characterConfig.stepHeight, 0f);
             }
 
         }
