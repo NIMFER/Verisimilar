@@ -21,6 +21,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
         public float aimVerticalSpeed; // This value controlls vertical looking speed while aiming down the sight
         public float aimHorizontalSpeed; // This value controlls horizontal looking speed while aiming down the sight
         public float stepHeight; // This value controlls how high steps charecter takes
+        public float currentStamina, maxStamina, staminaDepleation, staminaDepleationSpeed, normalMaxStamina;
         public bool allowSprint; // bool for enabling sprint
         public bool allowJump; // bool for enabling jumping
     }
