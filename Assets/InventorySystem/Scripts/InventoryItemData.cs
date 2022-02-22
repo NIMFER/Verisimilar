@@ -9,6 +9,9 @@ public class InventoryItemData : ScriptableObject
     // Item type
     public string id; // Item Id
     public string displayName; // Item name
+    public string displayDescription; // Item description
+    public string displayBuff0; // Item buff 1
+    public string displayBuff1; // Item buff 2
     public Texture preview;
     public GameObject prefab;
 

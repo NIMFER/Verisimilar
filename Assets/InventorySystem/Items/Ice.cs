@@ -6,7 +6,7 @@ public class Ice : MonoBehaviour
 {
 
     GameObject InventorySystem;
-    public InventoryItemData Object;
+    public InventoryItemData[] Object;
     InventoryData Data;
 
     // Start is called before the first frame update
@@ -15,12 +15,12 @@ public class Ice : MonoBehaviour
         InventorySystem = GameObject.Find("InventorySystem");
         Data = InventorySystem.GetComponent<InventoryData>();
 
-        Data.storeItem(0, Object);
-        Data.storeItem(1, Object);
-        Data.storeItem(2, Object);
+        Data.storeItem(0, Object[0]);
+        Data.storeItem(1, Object[1]);
+        Data.storeItem(2, Object[2]);
     }
 
-    /*This could be a way to get InventoryItemData
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Item")
@@ -30,6 +30,6 @@ public class Ice : MonoBehaviour
             Debug.Log(TMP.id);
         }
     }
-    */
+    
 
 }
