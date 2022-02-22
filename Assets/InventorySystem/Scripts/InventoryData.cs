@@ -13,13 +13,13 @@ public class InventoryData : MonoBehaviour
     bool toggleShowItems = true;
 
     // Update slot textures
-    void updateSlot(int Index, Texture preview)
+    private void updateSlot(int Index, Texture preview)
     {
         Slot[Index].texture = preview;
     }
 
     // Toggle show items
-    void toggleShow()
+    public void toggleShow()
     {
         toggleShowItems = !toggleShowItems;
         gameObject.SetActive(toggleShowItems);
