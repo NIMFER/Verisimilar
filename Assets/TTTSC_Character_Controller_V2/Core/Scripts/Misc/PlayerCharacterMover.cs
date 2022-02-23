@@ -66,6 +66,15 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
                     Crouch();
                     break;
             }
+
+            if (_walkPerforming)
+            {
+                _characterFST.movementState = CharacterFST.MovementState.Moving;
+            }
+            else
+            {
+                _characterFST.movementState = CharacterFST.MovementState.Standing;
+            }
         }
 
         private void Move()
