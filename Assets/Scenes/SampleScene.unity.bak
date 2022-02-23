@@ -4428,6 +4428,9 @@ LightingSettings:
   m_PVRFilteringAtrousPositionSigmaIndirect: 2
   m_PVRFilteringAtrousPositionSigmaAO: 1
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> ccd9c11d2bbab5d291e32a15e7638f37a49f3b67
 --- !u!1001 &2096989010
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4487,10 +4490,13 @@ PrefabInstance:
   m_SourcePrefab: {fileID: 100100000, guid: 4ddc751e0ec6ff641983ed314bba573b, type: 3}
 --- !u!1001 &7460501666406572029
 PrefabInstance:
+<<<<<<< HEAD
+=======
 =======
 --- !u!4 &494050539118062964
 Transform:
 >>>>>>> 4e8b2986a0c214d346486182238824cc7765f53f
+>>>>>>> ccd9c11d2bbab5d291e32a15e7638f37a49f3b67
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
