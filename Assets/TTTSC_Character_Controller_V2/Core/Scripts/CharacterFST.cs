@@ -6,10 +6,8 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
     {
         public CharacterState characterState; 
         public MovementType movementType;
-        public MovementState movementState;
         public bool ceilingDetected;
         public bool eligibleForStep;
-        public bool outOfBreath;
         [Header("Ladder bools")]
         public bool onLadder;
         public bool topOnLadder;
@@ -32,13 +30,7 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts
         {
             Walk,
             Crouch,
-            Sprint,
-        }
-
-        public enum MovementState
-        {
-            Standing,
-            Moving
+            Sprint
         }
 
         public enum ActionState

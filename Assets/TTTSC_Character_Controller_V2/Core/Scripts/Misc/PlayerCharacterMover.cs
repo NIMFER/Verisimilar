@@ -66,16 +66,6 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
                     Crouch();
                     break;
             }
-
-            switch (_walkPerforming)
-            {
-                case true:
-                    _characterFST.movementState = CharacterFST.MovementState.Moving;
-                    break;
-                case false:
-                    _characterFST.movementState = CharacterFST.MovementState.Standing;
-                    break;
-            }
         }
 
         private void Move()
@@ -93,23 +83,29 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
                 move /= 1.4f;
             }
 
-
-            switch (_characterFST.movementType)
+            if (_characterConfig.currentStamina > 0)
             {
-                case CharacterFST.MovementType.Sprint:
-                    move *= _characterConfig.sprintSpeedIncrease;
-                    break;
-                case CharacterFST.MovementType.Crouch:
-                    move /= _characterConfig.crouchSpeedDecrease;
-                    break;
+                switch (_characterFST.movementType)
+                {
+                    case CharacterFST.MovementType.Sprint:
+                        move *= _characterConfig.sprintSpeedIncrease;
+                        break;
+                    case CharacterFST.MovementType.Crouch:
+                        move /= _characterConfig.crouchSpeedDecrease;
+                        break;
+                }
             }
+            else
+            {
+                _characterFST.movementType = CharacterFST.MovementType.Walk;
+            }
+
 
             if (_walkPerforming)
             {
                 rb.AddForce(transform.forward * move.y - rb.velocity + transform.right * move.x - rb.velocity, ForceMode.Impulse);
                 if (_characterFST.eligibleForStep && _characterFST.movementType != CharacterFST.MovementType.Crouch)
                     rb.position += new Vector3(0f, _characterConfig.stepHeight, 0f);
-
             }
 
         }

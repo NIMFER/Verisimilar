@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TTTSC_Character_Controller_V2.Core.Scripts;
 using System.Threading.Tasks;
 using System;
@@ -10,7 +11,8 @@ public class Stamina : MonoBehaviour
     CharacterConfig _characterConfig;
     CharacterFST _characterFST;
     PlayerInputReceiver _playerInputReceiver;
-
+    [SerializeField]
+    Slider _staminaSlider;
 
 
     // Start is called before the first frame update
@@ -41,9 +43,10 @@ public class Stamina : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-
+        _staminaSlider.maxValue = _characterConfig.maxStamina;
+        _staminaSlider.value = _characterConfig.currentStamina;
     }
 
     public IEnumerator RegenStamina()
@@ -72,7 +75,7 @@ public class Stamina : MonoBehaviour
                 {
                     Debug.Log("stamina is not full yet");
                     _characterConfig.currentStamina += _characterConfig.staminaDepleation;
-                    yield return new WaitForSeconds(_characterConfig.staminaDepleationSpeed * 12);
+                    yield return new WaitForSecondsRealtime(_characterConfig.staminaDepleationSpeed * 12);
                 }
             }
 
@@ -94,7 +97,7 @@ public class Stamina : MonoBehaviour
                 {
                     Debug.Log("stamina is not full yet");
                     _characterConfig.currentStamina += _characterConfig.staminaDepleation;
-                    yield return new WaitForSeconds(_characterConfig.staminaDepleationSpeed * 10);
+                    yield return new WaitForSecondsRealtime(_characterConfig.staminaDepleationSpeed * 10);
                 }
             }
         }
@@ -106,29 +109,36 @@ public class Stamina : MonoBehaviour
 
     public IEnumerator TakeStamina()
     {
-        if (_characterFST.movementType == CharacterFST.MovementType.Sprint && _characterConfig.currentStamina >= 1)
-        {
-            Debug.Log("player is running");
 
-            while (_characterFST.movementType == CharacterFST.MovementType.Sprint)
+        while (true)
+        {
+            if (_characterFST.movementType == CharacterFST.MovementType.Sprint && _characterConfig.currentStamina > 0)
             {
 
-                if (_characterConfig.currentStamina == 0)
+                while (_characterFST.movementState == CharacterFST.MovementState.Moving)
                 {
-                    Debug.Log("No stamina left");
-                    _characterFST.outOfBreath = true;
-                    yield return new WaitForSeconds(1);
-                    break;
-                }
-                else
-                {
-                    Debug.Log("player still has stamina");
-                    yield return new WaitForSeconds(_characterConfig.staminaDepleationSpeed);
-                    _characterConfig.currentStamina -= _characterConfig.staminaDepleation;
+                    Debug.Log("player is running");
+
+                    if (_characterConfig.currentStamina == 0)
+                    {
+                        Debug.Log("No stamina left");
+                        _characterFST.outOfBreath = true;
+                        yield return new WaitForSecondsRealtime(1);
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log("player still has stamina");
+                        yield return new WaitForSecondsRealtime(_characterConfig.staminaDepleationSpeed);
+                        _characterConfig.currentStamina -= _characterConfig.staminaDepleation;
+                    }
                 }
             }
+
+
+            yield return new WaitForSecondsRealtime(0.1f);
         }
 
-        new WaitForSecondsRealtime(1);
+
     }
 }
