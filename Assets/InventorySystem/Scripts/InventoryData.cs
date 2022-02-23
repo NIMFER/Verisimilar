@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryData : MonoBehaviour
 {
@@ -13,7 +14,7 @@ public class InventoryData : MonoBehaviour
     public Toggle[] SlotT; // Toggle of Slots
 
     public GameObject Statistic; // Self explanatory
-    public Text[] StatisticT; // Text of Statistic, 0 - ItemName, 1 - Description, 2 - Buffs
+    public TMP_Text[] StatisticT; // Text of Statistic, 0 - ItemName, 1 - Description, 2 - Buffs
 
     private InventoryItemData selectedItem;
     private int indexItem;
