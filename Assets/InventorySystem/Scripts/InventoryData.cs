@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventoryData : MonoBehaviour
 {
+
+    public GameObject targetDrop;
 
     public InventoryItemData noneData; // used to set slot to none
     public InventoryItemData[] ItemList; // Items
@@ -13,7 +16,7 @@ public class InventoryData : MonoBehaviour
     public Toggle[] SlotT; // Toggle of Slots
 
     public GameObject Statistic; // Self explanatory
-    public Text[] StatisticT; // Text of Statistic, 0 - ItemName, 1 - Description, 2 - Buffs
+    public TMP_Text[] StatisticT; // Text of Statistic, 0 - ItemName, 1 - Description, 2 - Buffs
 
     private InventoryItemData selectedItem;
     private int indexItem;
@@ -25,6 +28,10 @@ public class InventoryData : MonoBehaviour
         selectedItem = noneData;
         indexItem = -1;
         setShowdisplayStatistic(false);
+        for (int i = 0; i < SlotRI.Length; i++)
+        {
+            updateSlot(i, ItemList[i].preview);
+        }
     }
 
     // Update slot textures
@@ -93,7 +100,8 @@ public class InventoryData : MonoBehaviour
                 indexItem = tmpArray[0];
                 setShowdisplayStatistic(true);
                 displayStatistic(tmpArray[0]);
-            } else
+            }
+            else
             {
                 selectedItem = noneData; // Just to be safe
                 indexItem = -1; // Just to be safe
@@ -123,10 +131,11 @@ public class InventoryData : MonoBehaviour
     }
 
     // Drop item from list
-    public void dropItem() {
+    public void dropItem()
+    {
         if (selectedItem.id != "0" && indexItem >= 0)
         {
-            Instantiate(selectedItem.prefab, new Vector3(0, 0, 0), Quaternion.identity); // spawn shit?
+            Instantiate(ItemList[indexItem].prefab, targetDrop.transform.position, Quaternion.identity);
 
             ItemList[indexItem] = noneData;
             updateSlot(indexItem, ItemList[indexItem].preview);
@@ -137,10 +146,22 @@ public class InventoryData : MonoBehaviour
     }
 
     // Save item to the list
-    public void storeItem(int Index, InventoryItemData value)
+    public bool storeItem(InventoryItemData value)
     {
-        ItemList[Index] = value;
-        updateSlot(Index, ItemList[Index].preview);
+        bool found = false;
+        for (int i = 0; i < SlotRI.Length; i++)
+        {
+            if (ItemList[i].id == "0")
+            {
+                ItemList[i] = value;
+                updateSlot(i, ItemList[i].preview);
+                found = true;
+                break;
+            }
+        }
+
+        return found;
+
     }
 
 }

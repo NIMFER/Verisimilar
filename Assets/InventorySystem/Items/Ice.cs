@@ -15,21 +15,10 @@ public class Ice : MonoBehaviour
         InventorySystem = GameObject.Find("InventorySystem");
         Data = InventorySystem.GetComponent<InventoryData>();
 
-        Data.storeItem(0, Object[0]);
-        Data.storeItem(1, Object[1]);
-        Data.storeItem(2, Object[2]);
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Item")
+        for (int i = 0; i < Object.Length; i++)
         {
-            InventoryItemData TMP = other.gameObject.GetComponent<InventoryItemData>();
-            Data.storeItem(0, TMP);
-            Debug.Log(TMP.id);
+            Data.storeItem(Object[i]);
         }
     }
-    
 
 }
