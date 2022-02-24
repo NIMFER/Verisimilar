@@ -20,14 +20,14 @@ namespace TTTSC_Character_Controller_V2.Core.Scripts.Misc
         {
             _characterFST = GetComponent<CharacterFST>();
             _characterConfig = GetComponent<CharacterConfig>();
-            GetComponent<PlayerInputReceiver>().jumpInputEvent += Jump;
-            GetComponent<PlayerInputReceiver>().walkInputEvent += WalkInput;
+            GetComponent<PlayerInputReceiver>().JumpInputEvent += Jump;
+            GetComponent<PlayerInputReceiver>().WalkInputEvent += WalkInput;
         }
 
         private void OnDisable()
         {
-            GetComponent<PlayerInputReceiver>().jumpInputEvent -= Jump;
-            GetComponent<PlayerInputReceiver>().walkInputEvent -= WalkInput;
+            GetComponent<PlayerInputReceiver>().JumpInputEvent -= Jump;
+            GetComponent<PlayerInputReceiver>().WalkInputEvent -= WalkInput;
         }
 
         void Start()

@@ -20,7 +20,7 @@ public class CinemachineFPSCamera : CinemachineExtension
     {
         _playerInputReceiver = FindObjectOfType<PlayerInputReceiver>();
         _characterConfig = FindObjectOfType<CharacterConfig>();
-        _playerInputReceiver.lookInputEvent += LookInput;
+        _playerInputReceiver.LookInputEvent += LookInput;
         base.Awake();
     }
 

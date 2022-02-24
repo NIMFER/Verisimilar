@@ -1,23 +1,35 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TTTSC_Character_Controller_V2.Core.Scripts;
 
 public class CameraInventoryCheck : MonoBehaviour
 {
-
+    private PlayerInputReceiver playerInputReceiver;
     public InventoryData Inventory;
     public float pickupDistance;
+    RaycastHit hitData;
+    int layerMask;
+
+    private void OnEnable()
+    {
+        playerInputReceiver = FindObjectOfType<PlayerInputReceiver>();
+        playerInputReceiver.InteractInputEvent += Interact;
+    }
+
+    void Interact(float performed)
+    {
+        // Create ray
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        Physics.Raycast(ray, out hitData, pickupDistance, layerMask);
+    }
 
     void FixedUpdate()
     {
 
         // Bit shift the index of the layer (10) to get a bit mask
-        int layerMask = 1 << 10;
-
-        // Create ray
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hitData;
-        Physics.Raycast(ray, out hitData, pickupDistance, layerMask);
+        layerMask = 1 << 10;
 
         // Check if any collider found
         if (hitData.collider != null)

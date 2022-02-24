@@ -22,7 +22,7 @@ public class Stamina : MonoBehaviour
         _characterFST = GetComponent<CharacterFST>();
         _playerInputReceiver = GetComponent<PlayerInputReceiver>();
 
-        _playerInputReceiver.sprintInputEvent += Sprint;
+        _playerInputReceiver.SprintInputEvent += Sprint;
     }
 
     private void Sprint(float performing)
@@ -57,7 +57,7 @@ public class Stamina : MonoBehaviour
         {
 
             Debug.Log("you are out of breath");
-            new WaitForSecondsRealtime(20);
+            new WaitForSecondsRealtime(20f);
             Debug.Log("wait time is over");
 
             Debug.Log("player is not running");
