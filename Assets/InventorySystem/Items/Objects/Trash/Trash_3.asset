@@ -18,7 +18,7 @@ MonoBehaviour:
   displayBuff0: '-  -99.9% Stamina'
   displayBuff1: '-  -30.5% Silence'
   preview: {fileID: 2800000, guid: 671f355355e956e49baf9b411a0d0d64, type: 3}
-  prefab: {fileID: 4350388151880217825, guid: b5aeeaa6b1a5f95418bbf7dbb959107f, type: 3}
+  prefab: {fileID: 8934062838630890495, guid: fc61c56aab89f914a95fb02049744892, type: 3}
   slot: 0
   duration: 0
   speed: 0

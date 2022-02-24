@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69b1409c049d1dd48a86bf454cab12f4, type: 3}
-  m_Name: Trash_2
+  m_Name: Key
   m_EditorClassIdentifier: 
-  id: 3
-  displayName: Trash_2
-  displayDescription: This item is very loud but gives nightvision
-  displayBuff0: '-  +3.1% Nightvision'
-  displayBuff1: '-  -2.4% Silence'
-  preview: {fileID: 2800000, guid: 8020a6731599ffb41982498676b9b415, type: 3}
-  prefab: {fileID: 4808486575512992659, guid: ccf0e56a737c6484a926d26de9616695, type: 3}
+  id: 5
+  displayName: Key
+  displayDescription: Just a normal key
+  displayBuff0: 
+  displayBuff1: 
+  preview: {fileID: 2800000, guid: b9b7ff8c10c637840872615bbe768b76, type: 3}
+  prefab: {fileID: 1476417020472554070, guid: b3824c1798a08e047ae3173f1e1954ad, type: 3}
   slot: 0
   duration: 0
   speed: 0
