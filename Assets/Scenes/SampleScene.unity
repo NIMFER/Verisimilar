@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -190,7 +190,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 8426414193610992635, guid: bd6e00c143761454b80e4438c3a35850, type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: -302757538664675876, guid: bd6e00c143761454b80e4438c3a35850, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: bd6e00c143761454b80e4438c3a35850, type: 3}
 --- !u!1 &192891452
 GameObject:
@@ -4823,7 +4828,7 @@ MonoBehaviour:
   stepCheckLowTriggered: 0
   _stepUpLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!224 &739623284629683861
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6420,7 +6425,7 @@ MonoBehaviour:
   stepCheckHighTriggered: 0
   _stepUpLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 0
 --- !u!222 &2670817973909371131
 CanvasRenderer:
   m_ObjectHideFlags: 0
