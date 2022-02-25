@@ -5,6 +5,11 @@ using UnityEngine;
 public class DoorBehaviour : MonoBehaviour
 {
 
+    public GameObject doorPivotRotation;
+    public GameObject doorRotation;
+    public float degree;
+    Quaternion target;
+
     string idItem = "5";
 
     public bool locked = true;
@@ -16,6 +21,11 @@ public class DoorBehaviour : MonoBehaviour
     void Start()
     {
         Inventory = GameObject.Find("InventorySystem").GetComponent<InventoryData>();
+    }
+
+    void Update()
+    {
+        doorPivotRotation.transform.rotation = Quaternion.RotateTowards(transform.rotation, target, Time.deltaTime * 150.0f);
     }
 
     public void interactDoor(string Event)
@@ -32,7 +42,7 @@ public class DoorBehaviour : MonoBehaviour
                     }
                 }
             }
-            Debug.Log(locked);
+
         } 
         else if (Event == "closeOpen")
         {
@@ -42,11 +52,15 @@ public class DoorBehaviour : MonoBehaviour
                 {
                     if (closed && !locked)
                     {
-                        gameObject.SetActive(false);
+                        closed = false;
+                        target = Quaternion.Euler(doorRotation.transform.eulerAngles);
+                        break;
                     }
                     else
                     {
-                        gameObject.SetActive(true);
+                        closed = true;
+                        target = Quaternion.Euler(0, doorRotation.transform.eulerAngles.y + degree, 0);
+                        break;
                     }
                 }
             }

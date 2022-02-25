@@ -23,11 +23,12 @@ public class CameraInventoryCheck : MonoBehaviour
         Ray ray = new Ray(transform.position, transform.forward);
 
         Physics.Raycast(ray, out hitData, pickupDistance, layerMask);
+
+        checkObject();
     }
 
-    void FixedUpdate()
+    void checkObject()
     {
-
         // Bit shift the index of the layer (10) to get a bit mask
         layerMask = 1 << 10;
 
@@ -37,9 +38,11 @@ public class CameraInventoryCheck : MonoBehaviour
             // If collider is item
             if (hitData.collider.tag == "Item")
             {
+
                 // Check if item is not air or none
                 if (int.Parse(hitData.collider.gameObject.GetComponent<ItemBehaviour>().ItemData.id) > 0)
                 {
+
                     // Save item and check if item can be stored
                     InventoryItemData Item = hitData.collider.gameObject.GetComponent<ItemBehaviour>().ItemData;
                     if (Inventory.storeItem(Item))
