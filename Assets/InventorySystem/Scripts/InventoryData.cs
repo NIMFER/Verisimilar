@@ -11,6 +11,7 @@ public class InventoryData : MonoBehaviour
 
     public InventoryItemData noneData; // used to set slot to none
     public InventoryItemData[] ItemList; // Items
+    public InventoryItemData[] AvaibleItem; // All avaible items sorted by ID
 
     public RawImage[] SlotRI; // RawImage of Slots
     public Toggle[] SlotT; // Toggle of Slots
@@ -28,10 +29,15 @@ public class InventoryData : MonoBehaviour
         selectedItem = noneData;
         indexItem = -1;
         setShowdisplayStatistic(false);
+
         for (int i = 0; i < SlotRI.Length; i++)
         {
             updateSlot(i, ItemList[i].preview);
         }
+
+        //saveItems(0);
+        loadItems(1);
+
     }
 
     // Update slot textures
@@ -66,6 +72,43 @@ public class InventoryData : MonoBehaviour
     private void setShowdisplayStatistic(bool show)
     {
         Statistic.SetActive(show);
+    }
+
+    // Loads saved items
+    public void loadItems(int index)
+    {
+        if (GameObject.Find("SaveSystem"))
+        {
+            SaveData data = GameObject.Find("SaveSystem").GetComponent<SaveData>();
+            if (data.load(index) != null)
+            {
+                for (int i = 0; i < ItemList.Length; i++)
+                {
+                    ItemList[i] = AvaibleItem[int.Parse(data.load(index).inventoryId[i])]; // Extract avaible item using ID from data
+                    updateSlot(i, ItemList[i].preview);
+                }
+            }
+        }
+        else // If gameobject not found
+        {
+            Debug.LogError("No 'SaveSystem' found in scene!");
+        }
+    }
+
+    public void saveItems(int index)
+    {
+        if (GameObject.Find("SaveSystem"))
+        {
+            SaveData data = GameObject.Find("SaveSystem").GetComponent<SaveData>();
+            if (data.load(index) != null)
+            {
+                data.save(index);
+            }
+        }
+        else
+        {
+            Debug.LogError("No 'SaveSystem' found in scene!");
+        }
     }
 
     // Check toggle for items swap

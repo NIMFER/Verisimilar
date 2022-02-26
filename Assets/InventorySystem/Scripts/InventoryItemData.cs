@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "OpenCodeBox/Inventory/Item Data")]
+[System.Serializable]
 public class InventoryItemData : ScriptableObject
 {
 

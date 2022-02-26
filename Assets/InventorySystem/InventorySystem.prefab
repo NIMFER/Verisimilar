@@ -766,6 +766,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: aa80c5b999062e44ebe92bd185997a2c, type: 2}
   - {fileID: 11400000, guid: aa80c5b999062e44ebe92bd185997a2c, type: 2}
   - {fileID: 11400000, guid: aa80c5b999062e44ebe92bd185997a2c, type: 2}
+  AvaibleItem:
+  - {fileID: 11400000, guid: aa80c5b999062e44ebe92bd185997a2c, type: 2}
+  - {fileID: 11400000, guid: d2a0c4e9f335dee45ab637c0a1aad7e7, type: 2}
+  - {fileID: 11400000, guid: 1282da918687ea7438654cc41a96d7d3, type: 2}
+  - {fileID: 11400000, guid: 862e28a89617bc34d9075267c4652db7, type: 2}
+  - {fileID: 11400000, guid: 446113bf76eeaa94c910daa03b7dc407, type: 2}
+  - {fileID: 11400000, guid: f3092879d91d7ed458f707c271b38a5c, type: 2}
   SlotRI:
   - {fileID: 1630785059033980063}
   - {fileID: 1630785057395842364}
