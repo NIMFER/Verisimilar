@@ -10,6 +10,7 @@ public class SaveData : MonoBehaviour
 
     public InventoryData inventory;
     public SavedSaveManage saveManage;
+    public int index; // Which file to load and save
 
     private string[] savedFile;
 

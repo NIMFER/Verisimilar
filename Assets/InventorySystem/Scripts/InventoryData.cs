@@ -35,8 +35,9 @@ public class InventoryData : MonoBehaviour
             updateSlot(i, ItemList[i].preview);
         }
 
+        // TEST //
         //saveItems(0);
-        loadItems(1);
+        loadItems(0);
 
     }
 
